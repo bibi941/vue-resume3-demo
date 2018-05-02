@@ -1,0 +1,140 @@
+@media(min-width:500px) {
+  /* reset */
+  *,
+  *::after,
+  *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  ul,
+  li {
+    list-style: none;
+  }
+  html {
+    font-size: 18px;
+  }
+  /* 布局 */
+  .page {
+    height: 100vh;
+    overflow: auto;
+    display: flex;
+  }
+}
+
+.page>aside {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  flex-shrink: 0;
+  border-right: 1px solid #dddddd;
+  box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.5)
+}
+
+.page>main {
+  flex: 1;
+  overflow: auto;
+}
+
+.page>aside>.upper {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 边栏 */
+
+.page>aside>.upper>.actions>li {
+  margin: 10px;
+}
+
+.page>aside>.down>.button {
+  margin: 10px;
+}
+
+.button {
+  padding: 3px 10px;
+  border: none;
+  font-size: inherit;
+}
+
+/* 主页面 */
+
+.resume {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.resume>section {
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+}
+.resume>section>span{
+ text-align: center;
+}
+.resume>section>h1 {
+  text-align: center;
+  margin: 20px;
+}
+
+.resume>section>h2 {
+  text-align: center;
+  margin: 20px;
+}
+
+.resume>section>.profile {
+  text-align: center;
+}
+
+.resume .skills>ul>li {
+  width: 48%;
+  border: 1px solid #dddddd;
+  margin-top: 10px;
+}
+
+.resume .skills>ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.resume>.projects>ol {
+  margin: 0 auto;
+}
+
+.resume>.projects>ol>li {
+  margin: 30px 0;
+  border: 1px solid #dddddd;
+  padding: 0 10px;
+}
+
+.resume>.projects header {
+  display: flex;
+  flex-direction: column;
+}
+
+.resume>.projects header>.buttom {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.edit-button{
+  position: relative;
+  margin:0 30px 0 0 ;
+}
+.edit-button button{
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 20%;
+  z-index: 1;
+}
+.edit-button:hover button {
+  display: inline-block;
+}
