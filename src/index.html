@@ -31,13 +31,12 @@
         </ul>
       </div>
       <div class="down">
-        <button class="button" @click='onLogOut'>登出</button>
+        <button class="button" @click='onLogOut' v-show="AV.User.current()">登出</button>
       </div>
     </aside>
     <main>
       <div class="resume">
         <section v-cloak>
-          {{resume}}
           <h1>
             <edit-span :value="resume.name" @edit="onEdit('name', $event)"></edit-span>
           </h1>
@@ -118,11 +117,11 @@
         <button type="button" @click="logInVisable = false">关闭</button>
         <div class="row">
           <label>邮箱</label>
-          <input type="text" v-model="logIn.email">
+          <input type="email" v-model="logIn.email" required>
         </div>
         <div class="row">
           <label>密码</label>
-          <input type="password" v-model="logIn.password">
+          <input type="password" v-model="logIn.password" required>
         </div>
         <div class="actions">
           <button type="submit">提交</button>
@@ -137,11 +136,11 @@
         <button type="button" @click="signUpVisable = false">关闭</button>
         <div class="row">
           <label>邮箱</label>
-          <input type="text" v-model="signUp.email">
+          <input type="email" v-model="signUp.email" required>
         </div>
         <div class="row">
           <label>密码</label>
-          <input type="text" v-model="signUp.password">
+          <input type="password" v-model="signUp.password" required>
         </div>
         <div class="actions">
           <button type="submit">提交</button>
