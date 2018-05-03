@@ -18,6 +18,9 @@
   html {
     font-size: 18px;
   }
+  [v-cloak]{
+    display: none !important;
+  }
   /* 布局 */
   .page {
     height: 100vh;

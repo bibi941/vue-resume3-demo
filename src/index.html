@@ -36,7 +36,7 @@
     </aside>
     <main>
       <div class="resume">
-        <section>
+        <section v-cloak>
           {{resume}}
           <h1>
             <edit-span :value="resume.name" @edit="onEdit('name', $event)"></edit-span>
@@ -111,10 +111,11 @@
         </section>
       </div>
     </main>
-    <div class="login" v-show="logInVisable">
+    <!-- 登录 -->
+    <div class="login" v-show="logInVisable" v-cloak>
       <form @submit.prevent='onLogIn'>
         <h2>登录</h2>
-        <button @click="logInVisable = false">关闭</button>
+        <button type="button" @click="logInVisable = false">关闭</button>
         <div class="row">
           <label>邮箱</label>
           <input type="text" v-model="logIn.email">
@@ -129,10 +130,11 @@
         </div>
       </form>
     </div>
-    <div class="signUp" v-show="signUpVisable">
+    <!-- 注册 -->
+    <div class="signUp" v-show="signUpVisable" v-cloak>
       <form @submit.prevent=' onSignUp'>
         <h2>注册</h2>
-        <button @click="signUpVisable = false">关闭</button>
+        <button type="button" @click="signUpVisable = false">关闭</button>
         <div class="row">
           <label>邮箱</label>
           <input type="text" v-model="signUp.email">
