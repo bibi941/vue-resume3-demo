@@ -37,7 +37,7 @@ let app = new Vue({
     onLogIn() { //登录
       AV.User.logIn(this.logIn.email, this.logIn.password).then(
         (user) => {
-          this.logInVisable=false
+          this.logInVisable = false
         }, (error) => {
           if (error.code === 211) {
             alert('邮箱不存在')
@@ -46,10 +46,12 @@ let app = new Vue({
           }
         })
     },
-    onLogOut() {//登出
-      AV.User.logOut()
-      alert('注销成功')
-      window.location.reload()
+    onLogOut() { //登出
+      if (new AV.User()) {
+        AV.User.logOut()
+        alert('注销成功')
+        window.location.reload()
+      }
     },
     OnClickSave() {
       let currentUser = AV.User.current()
