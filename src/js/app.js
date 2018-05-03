@@ -11,11 +11,45 @@ let app = new Vue({
       sex: '男',
       email: 'sssrrrr@vip.qq.com',
       phone: '17608003060'
+    },
+    signUp: {
+      email: '',
+      password: '',
+    },
+    logIn: {
+      email: '',
+      password: '',
     }
   },
   methods: {
     onEdit(key, value) {
       this.resume[key] = value
+    },
+    onSignUp(e) { //注册
+      let user = new AV.User()
+      user.setUsername(this.signUp.email)
+      user.setPassword(this.signUp.password)
+      user.setEmail(this.signUp.email)
+      user.signUp().then((user) => {}, (error) => {
+        console.log(error)
+      })
+    },
+    onLogIn() { //登录
+      AV.User.logIn(this.logIn.email, this.logIn.password).then(
+        (user) => {
+          this.logInVisable=false
+        }, (error) => {
+          if (error.code === 211) {
+            alert('邮箱不存在')
+          } else if (error.code === 210) {
+            alert('邮箱和密码不匹配')
+          }
+        })
+    },
+    onLogOut() {//登出
+      AV.User.logOut()
+      alert('注销成功')
+      window.location.reload()
     },
     OnClickSave() {
       let currentUser = AV.User.current()
@@ -24,13 +58,13 @@ let app = new Vue({
       } else {
         this.logInVisable = true
       }
-      // let Users = AV.Object.extend('Users')
-      // let user = new Users()
-      // user.set('resume', this.resume)
-      // user.save().then(() => {}, () => {})
     },
-    savaResume() { },
-    onCloseLogin() {
-    }
+    savaResume() {
+      let id = AV.User.current().id
+      let user = AV.Object.createWithoutData('User', id);
+      user.set('resume', this.resume)
+      user.save()
+    },
+    onCloseLogin() {},
   }
 })

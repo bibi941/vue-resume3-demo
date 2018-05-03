@@ -1,15 +1,18 @@
-.signUp{
+.signUp {
   position: fixed;
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-background: rgba(0, 0, 0, 0.6)  
+  background: rgba(0, 0, 0, 0.6);
 }
+
 .signUp>form {
   min-width: 400px;
   min-height: 400px;
   background: red;
   z-index: 1;
+  transition: all 1s;
+  
 }

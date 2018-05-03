@@ -31,12 +31,13 @@
         </ul>
       </div>
       <div class="down">
-        <button class="button">登出</button>
+        <button class="button" @click='onLogOut'>登出</button>
       </div>
     </aside>
     <main>
       <div class="resume">
         <section>
+          {{resume}}
           <h1>
             <edit-span :value="resume.name" @edit="onEdit('name', $event)"></edit-span>
           </h1>
@@ -111,38 +112,38 @@
       </div>
     </main>
     <div class="login" v-show="logInVisable">
-      <form>
+      <form @submit.prevent='onLogIn'>
         <h2>登录</h2>
         <button @click="logInVisable = false">关闭</button>
         <div class="row">
           <label>邮箱</label>
-          <input type="text">
+          <input type="text" v-model="logIn.email">
         </div>
         <div class="row">
           <label>密码</label>
-          <input type="text">
+          <input type="password" v-model="logIn.password">
         </div>
         <div class="actions">
-          <button>提交</button>
+          <button type="submit">提交</button>
           <a href="#" @click='signUpVisable=true;logInVisable = false'>注册</a>
         </div>
       </form>
     </div>
     <div class="signUp" v-show="signUpVisable">
-      <form>
+      <form @submit.prevent=' onSignUp'>
         <h2>注册</h2>
         <button @click="signUpVisable = false">关闭</button>
         <div class="row">
           <label>邮箱</label>
-          <input type="text">
+          <input type="text" v-model="signUp.email">
         </div>
         <div class="row">
           <label>密码</label>
-          <input type="text">
+          <input type="text" v-model="signUp.password">
         </div>
         <div class="actions">
-          <button>提交</button>
-          <a href="#">注册</a>
+          <button type="submit">提交</button>
+          <a href="#" @click='signUpVisable=false;logInVisable = true'>登录</a>
         </div>
       </form>
     </div>
