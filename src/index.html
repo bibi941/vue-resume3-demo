@@ -36,6 +36,10 @@
     </aside>
     <main>
       <div class="resume">
+        <div>
+          {{lonInMessage}}
+        </div>
+        <!-- 简历 -->
         <section v-cloak>
           <h1>
             <edit-span :value="resume.name" @edit="onEdit('name', $event)"></edit-span>

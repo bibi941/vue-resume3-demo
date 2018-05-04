@@ -20,8 +20,8 @@ let app = new Vue({
       email: '',
       password: ''
     },
-    currentUser: {
-      id: '',
+    //展示到页面上的信息
+    lonInMessage: {
       email: ''
     }
   },
@@ -37,7 +37,17 @@ let app = new Vue({
       user.setEmail(this.signUp.email)
       user.signUp().then(
         user => {
+          alert('注册成功,已经自动帮你登录啦')
           this.signUpVisable = false
+          //自动登录
+          AV.User.logIn(this.signUp.email, this.signUp.password).then(
+            user => {
+              this.lonInMessage = user.attributes.email
+            },
+            error => {
+              console.log(error)
+            }
+          )
         },
         error => {
           if (error.code === 203) {
@@ -50,7 +60,6 @@ let app = new Vue({
       //登录
       AV.User.logIn(this.logIn.email, this.logIn.password).then(
         user => {
-          console.log(user)
           this.logInVisable = false
         },
         error => {
@@ -83,8 +92,27 @@ let app = new Vue({
       let id = AV.User.current().id
       let user = AV.Object.createWithoutData('User', id)
       user.set('resume', this.resume)
-      user.save()
+      user.save().then(
+        () => {
+          alert('保存成功')
+        },
+        () => {
+          alert('保存失败')
+        }
+      )
     },
-    onCloseLogin() {}
+    onCloseLogin() {},
+    getResume() {
+      let user = new AV.Query('User')
+      user.get(AV.User.current().id).then(
+        data => {
+          this.resume = data.attributes.resume
+        },
+        () => {}
+      )
+    }
   }
 })
+if (AV.User.current()) {
+  app.getResume()
+}
