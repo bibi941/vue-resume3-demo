@@ -1,4 +1,4 @@
-@media(min-width:500px) {
+@media (min-width: 500px) {
   /* reset */
   *,
   *::after,
@@ -18,7 +18,7 @@
   html {
     font-size: 18px;
   }
-  [v-cloak]{
+  [v-cloak] {
     display: none !important;
   }
   /* 布局 */
@@ -29,7 +29,7 @@
   }
 }
 
-.page>aside {
+.page > aside {
   width: 100px;
   display: flex;
   flex-direction: column;
@@ -37,34 +37,37 @@
   text-align: center;
   flex-shrink: 0;
   border-right: 1px solid #dddddd;
-  box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.5)
+  box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.5);
 }
 
-.page>main {
+.page > main {
   flex: 1;
   overflow: auto;
 }
 
-.page>aside>.upper {
+.page > aside > .upper {
   display: flex;
   flex-direction: column;
 }
 
 /* 边栏 */
 
-.page>aside>.upper>.actions>li {
+.page > aside > .upper > .actions > li {
   margin: 10px;
 }
 
-.page>aside>.down>.button {
+.page > aside > .down > .button {
   margin: 10px;
 }
-
+.down{
+  margin-bottom: 10px;
+}
 .button {
   padding: 3px 10px;
   border: none;
   font-size: inherit;
 }
+
 
 /* 主页面 */
 
@@ -73,65 +76,69 @@
   margin: 0 auto;
 }
 
-.resume>section {
+.resume > section {
   margin: 50px 0;
   display: flex;
   flex-direction: column;
 }
-.resume>section>span{
- text-align: center;
+.resume > section > span {
+  text-align: center;
 }
-.resume>section>h1 {
+.resume > section > h1 {
   text-align: center;
   margin: 20px;
 }
 
-.resume>section>h2 {
+.resume > section > h2 {
   text-align: center;
   margin: 20px;
 }
 
-.resume>section>.profile {
+.resume > section > .profile {
   text-align: center;
 }
 
-.resume .skills>ul>li {
+.resume .skills > ul > li {
   width: 48%;
   border: 1px solid #dddddd;
   margin-top: 10px;
+  min-height: 50px;
 }
 
-.resume .skills>ul {
+.resume .skills > ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.resume>.projects>ol {
+.resume > .projects > ol {
   margin: 0 auto;
 }
 
-.resume>.projects>ol>li {
+.resume > .projects > ol > li {
+  min-height: 100px;
+  width: 800px;
   margin: 30px 0;
   border: 1px solid #dddddd;
   padding: 0 10px;
+  position: relative;
 }
 
-.resume>.projects header {
+.resume > .projects header {
   display: flex;
   flex-direction: column;
 }
 
-.resume>.projects header>.buttom {
+.resume > .projects header > .buttom {
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
 }
-.edit-button{
+.edit-button {
   position: relative;
-  margin:0 30px 0 0 ;
+  margin: 0 30px 0 0;
 }
-.edit-button button{
+.edit-button button {
   display: none;
   position: absolute;
   left: 100%;
@@ -140,4 +147,19 @@
 }
 .edit-button:hover button {
   display: inline-block;
+}
+.add-skills,
+.add-projects {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.skills > ul > li {
+  position: relative;
+}
+.remove {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: red;
 }

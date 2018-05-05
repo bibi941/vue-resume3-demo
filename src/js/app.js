@@ -10,7 +10,27 @@ let app = new Vue({
       job: '前端工程师',
       sex: '男',
       email: 'sssrrrr@vip.qq.com',
-      phone: '17608003060'
+      phone: '17608003060',
+      skills: [
+        { name: '名字', description: '我啥都会' },
+        { name: '名字', description: '我啥都会' },
+        { name: '名字', description: '我啥都会' },
+        { name: '名字', description: '我啥都会' }
+      ],
+      projects: [
+        {
+          name: '名称',
+          link: 'www.baidu.com',
+          keywords: '关键的1皮',
+          descrip: '描述描述'
+        },
+        {
+          name: '名称',
+          link: 'www.baidu.com',
+          keywords: '关键的1皮',
+          descrip: '描述描述123333333333333333333333333333333333333333333333'
+        }
+      ]
     },
     signUp: {
       email: '',
@@ -27,7 +47,20 @@ let app = new Vue({
   },
   methods: {
     onEdit(key, value) {
-      this.resume[key] = value
+      let reg = /\[(\d+)\]/g //取到[number]
+      key = key.replace(reg, (match, number) => {
+        return '.' + number
+      })
+      keys = key.split('.') //keys=['skills','0','name']
+      let result = this.resume
+      for (let i = 0; i < keys.length; i++) {
+        if (i === keys.length - 1) {
+          result[keys[i]] = value
+        } else {
+          result = result[keys[i]]
+          //i=0,1,2 result=this.resume[skills][0][name]
+        }
+      }
     },
     onSignUp(e) {
       //注册
@@ -79,7 +112,7 @@ let app = new Vue({
         window.location.reload()
       }
     },
-    OnClickSave() {
+    onClickSave() {
       //保存
       let currentUser = AV.User.current()
       if (currentUser) {
@@ -101,15 +134,34 @@ let app = new Vue({
         }
       )
     },
-    onCloseLogin() {},
     getResume() {
       let user = new AV.Query('User')
       user.get(AV.User.current().id).then(
         data => {
-          this.resume = data.attributes.resume
+          Object.assign(this.resume, data.attributes.resume)
         },
         () => {}
       )
+    },
+    addSkills() {
+      this.resume.skills.push({
+        name: '请填写技能名称',
+        description: '请填写技能描述'
+      })
+    },
+    removekills(index) {
+      this.resume.skills.splice(index, 1)
+    },
+    addProjects() {
+      this.resume.projects.push({
+        name: '名称',
+        link: 'www.baidu.com',
+        keywords: '关键的1皮',
+        descrip: '描述描述123333333333333333333333333333333333333333333333'
+      })
+    },
+    removeProjects(index) {
+      this.resume.projects.splice(index, 1)
     }
   }
 })
