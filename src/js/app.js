@@ -5,7 +5,9 @@ let app = new Vue({
     logInVisable: false,
     signUpVisable: false,
     sharaVisable: false,
-    currentUser: '',
+    currentUser: { id: '' },
+    previewUser: { id: '' },
+    previewResume: {},
     resume: {
       name: 'bibi',
       birthy: '1994.08.24',
@@ -42,8 +44,20 @@ let app = new Vue({
       email: '',
       password: ''
     },
-
-    shareLink: ''
+    shareLink: '',
+    mode: 'edit' //preview
+  },
+  watch: {
+    'currentUser.id': function(newValue, oldValue) {
+      if (newValue) {
+        this.getResume(this.currentUser)
+      }
+    }
+  },
+  computed: {
+    displayResume() {
+      return this.mode === 'preview' ? this.previewResume : this.resume
+    }
   },
   methods: {
     onEdit(key, value) {
@@ -93,6 +107,7 @@ let app = new Vue({
       //登录
       AV.User.logIn(this.logIn.email, this.logIn.password).then(
         user => {
+          app.currentUser = AV.User.current()
           this.logInVisable = false
         },
         error => {
@@ -134,11 +149,12 @@ let app = new Vue({
         }
       )
     },
-    getResume() {
-      let user = new AV.Query('User')
-      user.get(AV.User.current().id).then(
+    getResume(user) {
+      let query = new AV.Query('User')
+      return query.get(user.id).then(
         data => {
-          Object.assign(this.resume, data.attributes.resume)
+          let resume = data.attributes.resume
+          return resume
         },
         () => {}
       )
@@ -166,9 +182,26 @@ let app = new Vue({
   }
 })
 
-//如果你帐号登录的
-if (AV.User.current()) {
-  app.currentUser=AV.User.current()
-  app.getResume()
-  app.shareLink=location.origin+location.pathname+'?user_id='+app.currentUser.id
+//如果你是帐号登录的
+app.currentUser = AV.User.current()
+if (app.currentUser) {
+  app.shareLink =
+    location.origin + location.pathname + '?user_id=' + app.currentUser.id
+  app.getResume(app.currentUser).then(resume => {
+    app.resume = resume
+  })
+  app.mode = 'edit'
+}
+
+//如果你是分享的连接
+let search = location.search
+let regex = /user_id=([^&]+)/
+let matches = search.match(regex)
+let userId
+if (matches) {
+  userId = matches[1]
+  app.mode = 'preview'
+  app.getResume({ id: userId }).then(resume => {
+    app.previewResume = resume
+  })
 }

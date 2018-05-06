@@ -15,9 +15,8 @@
 
 <body>
   <div class="page" id="app">
-    <aside>
+    <aside v-show="mode==='edit'">
       <div class="upper">
-
         <ul class="actions">
           <li>
             <el-button @click='onClickSave' class="el-button" type="primary">保存</el-button>
@@ -42,28 +41,28 @@
         <!-- 简历 -->
         <section v-cloak>
           <h1>
-            <edit-span :value="resume.name" @edit="onEdit('name', $event)"></edit-span>
+            <edit-span :disable='mode==="preview"' :value="displayResume.name" @edit="onEdit('name', $event)"></edit-span>
           </h1>
           <p class="profile">
-            <edit-span :value="resume.job" @edit="onEdit('job', $event)"></edit-span>|
-            <edit-span :value="resume.sex" @edit="onEdit('sex', $event)"></edit-span>|
-            <edit-span :value="resume.email" @edit="onEdit('email', $event)"></edit-span>|
-            <edit-span :value="resume.phone" @edit="onEdit('phone', $event)"></edit-span>
+            <edit-span :disable='mode==="preview"' :value="displayResume.job" @edit="onEdit('job', $event)"></edit-span>|
+            <edit-span :disable='mode==="preview"' :value="displayResume.sex" @edit="onEdit('sex', $event)"></edit-span>|
+            <edit-span :disable='mode==="preview"' :value="displayResume.email" @edit="onEdit('email', $event)"></edit-span>|
+            <edit-span :disable='mode==="preview"' :value="displayResume.phone" @edit="onEdit('phone', $event)"></edit-span>
           </p>
         </section>
         <!-- 技能 -->
         <section class="skills">
           <h2>技能</h2>
           <ul>
-            <li v-for="skill,index in resume.skills">
-              <edit-span class="name" :value="skill.name" @edit="onEdit(`skills[${index}].name`, $event)"></edit-span>
+            <li v-for="skill,index in displayResume.skills">
+              <edit-span :disable='mode==="preview"' class="name" :value="skill.name" @edit="onEdit(`skills[${index}].name`, $event)"></edit-span>
               <div class="description">
-                <edit-span :value="skill.description" @edit="onEdit(`skills[${index}].description`, $event)"></edit-span>
+                <edit-span :disable='mode==="preview"' :value="skill.description" @edit="onEdit(`skills[${index}].description`, $event)"></edit-span>
               </div>
-              <i v-if="index>3" @click='removekills(index)' class="el-icon-circle-close-outline remove"></i>
+              <i v-if='mode==="edit"' v-if="index>3" @click='removekills(index)' class="el-icon-circle-close-outline remove"></i>
             </li>
-            <li class="add-skills">
-              <el-button @click='addSkills' type="primary" size='mini'>添加</el-button>
+            <li v-if='mode==="edit"' class="add-skills">
+              <el-button  @click='addSkills' type="primary" size='mini'>添加</el-button>
             </li>
           </ul>
         </section>
@@ -71,27 +70,27 @@
         <section class="projects">
           <h2>项目经历</h2>
           <ol>
-            <li v-for="project,index in resume.projects">
+            <li v-for="project,index in displayResume.projects">
               <header>
                 <h3 class="name">
-                  <edit-span :value='project.name' @edit="onEdit(`projects[${index}].name`, $event)"></edit-span>
+                  <edit-span :disable='mode==="preview"' :value='project.name' @edit="onEdit(`projects[${index}].name`, $event)"></edit-span>
                 </h3>
                 <div class="buttom">
                   <span class="link">
-                    <edit-span :value='project.link' @edit="onEdit(`projects[${index}].link`, $event)"></edit-span>
+                    <edit-span :disable='mode==="preview"' :value='project.link' @edit="onEdit(`projects[${index}].link`, $event)"></edit-span>
                   </span>
                   <span class="keywords">
-                    <edit-span :value='project.keywords' @edit="onEdit(`projects[${index}].keywords`, $event)"></edit-span>
+                    <edit-span :disable='mode==="preview"' :value='project.keywords' @edit="onEdit(`projects[${index}].keywords`, $event)"></edit-span>
                   </span>
                 </div>
               </header>
               <span class="descrip">
-                <edit-span :value='project.descrip' @edit="onEdit(`projects[${index}].descrip`, $event)"></edit-span>
+                <edit-span :disable='mode==="preview"' :value='project.descrip' @edit="onEdit(`projects[${index}].descrip`, $event)"></edit-span>
               </span>
               <i v-if="index>1" @click='removeProjects(index)' class="el-icon-circle-close-outline remove"></i>
             </li>
-            <li class="add-projects">
-              <el-button @click='addProjects' type="primary" size='medium'>添加</el-button>
+            <li v-if='mode==="edit"' class="add-projects">
+              <el-button  @click='addProjects' type="primary" size='medium'>添加</el-button>
             </li>
           </ol>
         </section>
@@ -139,6 +138,7 @@
       <h2>请复制下面的链接</h2>
       <div> {{shareLink}}</div>
     </div>
+    <el-button v-if="mode==='preview'" @click='mode="edit"' type="warning" style="position: fixed;left: 10px;top: 10px; background: rgb(65, 184, 132)">退出预览</el-button>    
   </div>
   <script src="../vendors/vue.min.js"></script>
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
