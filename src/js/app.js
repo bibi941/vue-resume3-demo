@@ -178,6 +178,9 @@ let app = new Vue({
     },
     removeProjects(index) {
       this.resume.projects.splice(index, 1)
+    },
+    print() {
+      window.print()
     }
   }
 })
@@ -190,7 +193,6 @@ if (app.currentUser) {
   app.getResume(app.currentUser).then(resume => {
     app.resume = resume
   })
-  app.mode = 'edit'
 }
 
 //如果你是分享的连接

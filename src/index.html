@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="./css/login.css">
   <link rel="stylesheet" href="./css/signup.css">
   <link rel="stylesheet" href="./css/share.css">
+  <link rel="stylesheet" href="./css/print.css" media="print">
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 
@@ -25,7 +26,7 @@
             <el-button type="success" @click='sharaVisable=true'>分享</el-button>
           </li>
           <li>
-            <el-button type="warning">打印</el-button>
+            <el-button type="warning" @click='print'>打印</el-button>
           </li>
           <li>
             <el-button type="info">换肤</el-button>
@@ -62,7 +63,7 @@
               <i v-if='mode==="edit"' v-if="index>3" @click='removekills(index)' class="el-icon-circle-close-outline remove"></i>
             </li>
             <li v-if='mode==="edit"' class="add-skills">
-              <el-button  @click='addSkills' type="primary" size='mini'>添加</el-button>
+              <el-button @click='addSkills' type="primary" size='mini'>添加</el-button>
             </li>
           </ul>
         </section>
@@ -90,7 +91,7 @@
               <i v-if="index>1" @click='removeProjects(index)' class="el-icon-circle-close-outline remove"></i>
             </li>
             <li v-if='mode==="edit"' class="add-projects">
-              <el-button  @click='addProjects' type="primary" size='medium'>添加</el-button>
+              <el-button @click='addProjects' type="primary" size='medium'>添加</el-button>
             </li>
           </ol>
         </section>
@@ -137,8 +138,9 @@
     <div class="share" v-show="sharaVisable" v-cloak>
       <h2>请复制下面的链接</h2>
       <div> {{shareLink}}</div>
+      <el-button @click='sharaVisable="false"' type="primary">保存</el-button>
     </div>
-    <el-button v-if="mode==='preview'" @click='mode="edit"' type="warning" style="position: fixed;left: 10px;top: 10px; background: rgb(65, 184, 132)">退出预览</el-button>    
+    <el-button v-if="mode==='preview'" @click='mode="edit"' type="warning" style="position: fixed;left: 10px;top: 10px; background: rgb(65, 184, 132)">退出预览</el-button>
   </div>
   <script src="../vendors/vue.min.js"></script>
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>

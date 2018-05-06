@@ -1,0 +1,8 @@
+.page>aside{
+  display: none
+}
+.add-skills,
+.add-projects,
+.el-icon-circle-close-outline.remove {
+  display: none;
+}
