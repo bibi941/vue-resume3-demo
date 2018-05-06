@@ -1,0 +1,19 @@
+.share {
+  position: fixed;
+  min-width: 600px;
+  min-height:300px;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  background: #ddd;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5)
+  
+}
+.share>h2{
+  margin-top: -40px
+}
+

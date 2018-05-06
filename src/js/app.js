@@ -4,6 +4,8 @@ let app = new Vue({
     editName: false,
     logInVisable: false,
     signUpVisable: false,
+    sharaVisable: false,
+    currentUser: '',
     resume: {
       name: 'bibi',
       birthy: '1994.08.24',
@@ -40,10 +42,8 @@ let app = new Vue({
       email: '',
       password: ''
     },
-    //展示到页面上的信息
-    lonInMessage: {
-      email: ''
-    }
+
+    shareLink: ''
   },
   methods: {
     onEdit(key, value) {
@@ -62,7 +62,7 @@ let app = new Vue({
         }
       }
     },
-    onSignUp(e) {
+    onSignUp() {
       //注册
       let user = new AV.User()
       user.setUsername(this.signUp.email)
@@ -165,6 +165,10 @@ let app = new Vue({
     }
   }
 })
+
+//如果你帐号登录的
 if (AV.User.current()) {
+  app.currentUser=AV.User.current()
   app.getResume()
+  app.shareLink=location.origin+location.pathname+'?user_id='+app.currentUser.id
 }

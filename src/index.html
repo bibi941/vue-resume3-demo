@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="./css/login.css">
   <link rel="stylesheet" href="./css/signup.css">
+  <link rel="stylesheet" href="./css/share.css">
   <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 </head>
 
@@ -22,7 +23,7 @@
             <el-button @click='onClickSave' class="el-button" type="primary">保存</el-button>
           </li>
           <li>
-            <el-button type="success">分享</el-button>
+            <el-button type="success" @click='sharaVisable=true'>分享</el-button>
           </li>
           <li>
             <el-button type="warning">打印</el-button>
@@ -133,6 +134,10 @@
           <a href="#" @click='signUpVisable=false;logInVisable = true'>登录</a>
         </div>
       </form>
+    </div>
+    <div class="share" v-show="sharaVisable" v-cloak>
+      <h2>请复制下面的链接</h2>
+      <div> {{shareLink}}</div>
     </div>
   </div>
   <script src="../vendors/vue.min.js"></script>
