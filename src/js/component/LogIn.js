@@ -26,9 +26,6 @@ Vue.component('log-in', {
       AV.User.logIn(this.logIn.email, this.logIn.password).then(
         user => {
           this.$emit('login', user)
-       
-          // app.currentUser = AV.User.current()
-          // this.logInVisable = false
         },
         error => {
           if (error.code === 211) {

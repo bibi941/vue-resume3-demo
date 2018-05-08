@@ -66,7 +66,7 @@
 /* 主页面 */
 
 .resume {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -111,7 +111,7 @@
 
 .resume > .projects > ol > li {
   min-height: 100px;
-  width: 600px;
+  width: 800px;
   margin: 30px 0;
   border: 1px solid #dddddd;
   padding: 0 10px;

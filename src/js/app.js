@@ -52,22 +52,6 @@ let app = new Vue({
     }
   },
   methods: {
-    onEdit(key, value) {
-      let reg = /\[(\d+)\]/g //取到[number]
-      key = key.replace(reg, (match, number) => {
-        return '.' + number
-      })
-      keys = key.split('.') //keys=['skills','0','name']
-      let result = this.resume
-      for (let i = 0; i < keys.length; i++) {
-        if (i === keys.length - 1) {
-          result[keys[i]] = value
-        } else {
-          result = result[keys[i]]
-          //i=0,1,2 result=this.resume[skills][0][name]
-        }
-      }
-    },
     onLogOut() {
       //登出
       if (new AV.User()) {
@@ -87,6 +71,7 @@ let app = new Vue({
     },
     onSignUp(user) {
       this.signUpVisable = false
+      //先保存到leancloud
       this.savaResume('signup')
       //自动登录
       AV.User.logIn(user[1], user[2]).then(
@@ -115,6 +100,7 @@ let app = new Vue({
       }
     },
     savaResume(string) {
+      //会根据有没有 id 来决定是新增还是更新一个对象
       let id = AV.User.current().id
       let user = AV.Object.createWithoutData('User', id)
       user.set('resume', this.resume)
@@ -139,26 +125,6 @@ let app = new Vue({
         },
         () => {}
       )
-    },
-    addSkills() {
-      this.resume.skills.push({
-        name: '请填写技能名称',
-        description: '请填写技能描述'
-      })
-    },
-    removekills(index) {
-      this.resume.skills.splice(index, 1)
-    },
-    addProjects() {
-      this.resume.projects.push({
-        name: '名称',
-        link: 'www.baidu.com',
-        keywords: '关键的1皮',
-        descrip: '描述描述123333333333333333333333333333333333333333333333'
-      })
-    },
-    removeProjects(index) {
-      this.resume.projects.splice(index, 1)
     },
     print() {
       window.print()
