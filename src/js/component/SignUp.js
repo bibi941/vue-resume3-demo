@@ -2,19 +2,23 @@ Vue.component('sign-up', {
   template: `
    <div class="signUp"  v-cloak>
       <form @submit.prevent='onSignUp'>
-        <h2>注册</h2>
-        <button type="button"@click="$emit('close')">关闭</button>
+        <h2>VueResume</h2>
         <div class="row">
           <label>邮箱</label>
-          <input type="email" v-model="signUp.email" required>
+          <el-input type="email" v-model="signUp.email" required placeholder="12345@qq.com" class='input' style='height:50px'>
         </div>
         <div class="row">
           <label>密码</label>
-          <input type="password" v-model="signUp.password" required>
+          <el-input type="password" v-model="signUp.password" required placeholder="password" class='input' style='height:50px'>
         </div>
         <div class="actions">
-          <button type="submit">提交</button>
-          <a href="#" @click="$emit('gotologin')">登录</a>
+          <el-button type="primary" native-type='submit' >注册</el-button>
+        </div>
+        <div class='goto-login'>
+            <span>已有帐号？</span><a @click="$emit('gotologin')">登录</a>
+        </div>
+        <div class='discript'>
+          <span>Designed by bibi in ChengDu &copy</span>
         </div>
       </form>
     </div>`,
@@ -30,15 +34,18 @@ Vue.component('sign-up', {
       user.setEmail(this.signUp.email)
       user.signUp().then(
         user => {
-          alert('注册成功,已经自动帮你登录啦')
+          this.open('注册成功,帮你登录啦')
           this.$emit('signup', [user, this.signUp.email, this.signUp.password])
         },
         error => {
           if (error.code === 203) {
-            alert('此邮箱已被注册')
+            this.open('此邮箱已被注册')
           }
         }
       )
+    },
+    open(message) {
+      this.$alert(message, '来自bibi的提示', { confirmButtonText: '确定' })
     }
   }
 })

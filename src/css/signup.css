@@ -1,17 +1,64 @@
 .signUp {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.6);
+ font-weight:400;
+ color: rgb(133, 144, 166);
+ position: fixed;
+ width: 100%;
+ height: 100%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ background:url(../img/background.jpg) center no-repeat;
+ background-size: cover;
 }
 
 .signUp>form {
-  min-width: 400px;
-  min-height: 400px;
-  background: red;
-  z-index: 1;
-  transition: all 1s;
+ position: relative;
+ min-width: 500px;
+ min-height: 500px;
+ background: rgb(255, 255, 255);
+ z-index: 1;
+ transition: all 1s;
+ border-radius: 2px;
+}
+.signUp>form>h2 {
+  color: rgb(0, 132, 255);
+  text-align: center;
+  font-size: 50px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+.signUp>form>.row {
+  margin: 35px 20px;
+}
+
+.signUp>form .el-input__inner {
+  height: 50px;
+  margin-top: 5px;
+}
+
+.signUp>form>.actions>.el-button {
+  padding: 12px 215px;
+  margin: 0 20px;
+}
+
+.signUp>form>.goto-login {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.signUp>form>.goto-login>span {
+  color: black;
+}
+
+.signUp>form>.goto-login>a {
+  color: #175199;
+    cursor: pointer;
+}
+.signUp>form>.discript {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+  bottom: -20px;
 }

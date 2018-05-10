@@ -15,26 +15,24 @@ let app = new Vue({
       birthy: '1994.08.24',
       job: '前端工程师',
       sex: '男',
-      email: 'sssrrrr@vip.qq.com',
+      email: 'sssrrr@vip.qq.com',
       phone: '17608003060',
       skills: [
-        { name: '名字', description: '我啥都会' },
-        { name: '名字', description: '我啥都会' },
-        { name: '名字', description: '我啥都会' },
-        { name: '名字', description: '我啥都会' }
+        { name: 'Vue', description: '了解Vuex+Vue-cli+Vue-Router' },
+        { name: 'CSS-LESS+SCSS', description: '百分百还原设计稿' },
       ],
       projects: [
         {
-          name: '名称',
+          name: '移动端网易云音乐',
           link: 'www.baidu.com',
-          keywords: '关键的1皮',
-          descrip: '描述描述'
+          keywords: 'jq+parcel+qiniu+leancloud',
+          descrip: '移动端+电脑端后台+各种功能'
         },
         {
-          name: '名称',
+          name: '移动端画板',
           link: 'www.baidu.com',
-          keywords: '关键的1皮',
-          descrip: '描述描述123333333333333333333333333333333333333333333333'
+          keywords: 'canvas',
+          descrip: '一个小画板而已'
         }
       ]
     }
@@ -56,7 +54,7 @@ let app = new Vue({
       //登出
       if (new AV.User()) {
         AV.User.logOut()
-        alert('注销成功')
+        this.open('注销成功')
         window.location.reload()
       }
     },
@@ -96,7 +94,7 @@ let app = new Vue({
       if (this.currentUser) {
         this.sharaVisable = true
       } else {
-        alert('请先登录')
+        this.open('请先点击保存')
       }
     },
     savaResume(string) {
@@ -108,11 +106,11 @@ let app = new Vue({
         () => {
           if (string) {
           } else {
-            alert('保存成功')
+            this.open('保存成功')
           }
         },
         () => {
-          alert('保存失败')
+          this.open('保存失败')
         }
       )
     },
@@ -128,6 +126,9 @@ let app = new Vue({
     },
     print() {
       window.print()
+    },
+    open(message) {
+      this.$alert(message, '来自bibi的提示', { confirmButtonText: '确定' })
     }
   }
 })

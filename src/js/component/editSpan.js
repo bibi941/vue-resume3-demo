@@ -1,20 +1,28 @@
 Vue.component('edit-span', {
-  props: ['value','disable'],
+  props: ['value', 'disable'],
   template: `
-   <span class='edit-button'>
+   <span >
     <span v-show="!editName">{{value}}</span>
-    <input type="text" v-show="editName" @input='listenInput' :value='value'>
-    <button v-if='!disable' @click="editName = !editName" >edit</button>
+    <el-input type="text" v-show="editName"   @change='listenInput' :value='value'  class='input'>
   </span>
   `,
   data() {
     return {
-      editName:false
+      editName: false,
+      addShow: false
     }
   },
+  created() {
+    this.$bus.$on('edit', x => {
+      this.editName = !this.editName
+    })
+    this.$bus.$on('add', x => {
+     this.editName=true
+    })
+  },
   methods: {
-    listenInput(e) {
-      this.$emit('edit',e.target.value)
+    listenInput(value) {
+      this.$emit('edit', value)
     }
   }
 })

@@ -2,16 +2,16 @@ Vue.component('resume', {
   props: ['mode', 'displayResume', 'resume'],
 
   template: `
-    <div class="resume">
+    <div class="resume ">
         <!-- 简历 -->
         <section v-cloak>
           <h1>
-            <edit-span :disable='mode==="preview"' :value="displayResume.name" @edit="onEdit('name', $event)"></edit-span>
+            <edit-span :disable='mode==="preview"' :value="displayResume.name" @edit="onEdit('name', $event)" ></edit-span>
           </h1>
           <p class="profile">
-            <edit-span :disable='mode==="preview"' :value="displayResume.job" @edit="onEdit('job', $event)"></edit-span>|
-            <edit-span :disable='mode==="preview"' :value="displayResume.sex" @edit="onEdit('sex', $event)"></edit-span>|
-            <edit-span :disable='mode==="preview"' :value="displayResume.email" @edit="onEdit('email', $event)"></edit-span>|
+            <edit-span :disable='mode==="preview"' :value="displayResume.job" @edit="onEdit('job', $event)"></edit-span>
+            <edit-span :disable='mode==="preview"' :value="displayResume.sex" @edit="onEdit('sex', $event)"></edit-span>
+            <edit-span :disable='mode==="preview"' :value="displayResume.email" @edit="onEdit('email', $event)"></edit-span>
             <edit-span :disable='mode==="preview"' :value="displayResume.phone" @edit="onEdit('phone', $event)"></edit-span>
           </p>
         </section>
@@ -20,13 +20,15 @@ Vue.component('resume', {
           <h2>技能</h2>
           <ul>
             <li v-for="skill,index in displayResume.skills">
+            <div class='name'>
               <edit-span :disable='mode==="preview"' class="name" :value="skill.name" @edit="onEdit('skills['+index+'].name', $event)"></edit-span>
-              <div class="description">
-                <edit-span :disable='mode==="preview"' :value="skill.description" @edit="onEdit('skills['+index+'].description', $event)"></edit-span>
-              </div>
-              <i v-if='mode==="edit"' v-if="index>3" @click='removekills(index)' class="el-icon-circle-close-outline remove"></i>
+            </div>
+            <div class="description">
+              <edit-span :disable='mode==="preview"' :value="skill.description" @edit="onEdit('skills['+index+'].description', $event)"></edit-span>
+            </div>
+              <i v-if='mode==="edit"' v-if="addProject" @click='removekills(index)' class="el-icon-circle-close-outline remove"></i>
             </li>
-            <li v-if='mode==="edit"' class="add-skills">
+            <li v-if='mode==="edit"' class="add-skills" v-show="!addProject" >
               <el-button @click='addSkills' type="primary" size='mini'>添加</el-button>
             </li>
           </ul>
@@ -49,22 +51,28 @@ Vue.component('resume', {
                   </span>
                 </div>
               </header>
-              <span class="descrip">
+              <div class="descrip">
                 <edit-span :disable='mode==="preview"' :value='project.descrip' @edit="onEdit('projects['+index+'].descrip', $event)"></edit-span>
-              </span>
-              <i v-if="index>1" @click='removeProjects(index)' class="el-icon-circle-close-outline remove"></i>
+              </div>
+              <i v-if="addProject" @click='removeProjects(index)' class="el-icon-circle-close-outline remove"></i>
             </li>
-            <li v-if='mode==="edit"' class="add-projects">
-              <el-button @click='addProjects' type="primary" size='medium'>添加</el-button>
+            <li v-if='mode==="edit"' class="add-projects" v-show="!addProject">
+              <el-button @click='addProjects' type="primary" size='medium' >添加</el-button>
             </li>
           </ol>
         </section>
       </div> `,
 
   data() {
-    return {}
+    return {
+      addProject: false
+    }
   },
-
+  created() {
+    this.$bus.$on('edit', x => {
+      this.addProject = !this.addProject
+    })
+  },
   methods: {
     onEdit(key, value) {
       let reg = /\[(\d+)\]/g //取到[number]
@@ -72,7 +80,7 @@ Vue.component('resume', {
         return '.' + number
       })
       keys = key.split('.') //keys=['skills','0','name']
-      let result = this.resume
+      let result = this.displayResume
       for (let i = 0; i < keys.length; i++) {
         if (i === keys.length - 1) {
           result[keys[i]] = value
@@ -83,13 +91,13 @@ Vue.component('resume', {
       }
     },
     addSkills() {
-      this.resume.skills.push({
+      this.displayResume.skills.push({
         name: '请填写技能名称',
         description: '请填写技能描述'
       })
     },
     addProjects() {
-      this.resume.projects.push({
+      this.displayResume.projects.push({
         name: '名称',
         link: 'www.baidu.com',
         keywords: '关键的1皮',
@@ -97,11 +105,11 @@ Vue.component('resume', {
       })
     },
     removekills(index) {
-      this.resume.skills.splice(index, 1)
+      this.displayResume.skills.splice(index, 1)
     },
 
     removeProjects(index) {
-      this.resume.projects.splice(index, 1)
+      this.displayResume.projects.splice(index, 1)
     }
   }
 })

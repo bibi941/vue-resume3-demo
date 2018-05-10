@@ -28,12 +28,17 @@
     <sign-up v-show="signUpVisable" @close='signUpVisable=false' @signup='onSignUp' @gotologin='logInVisable=true;signUpVisable=false'></sign-up>
     <!-- 分享 -->
     <share v-show="sharaVisable" :share-link='shareLink' @exit='sharaVisable=false'></share>
-    <el-button v-if="mode==='preview'" @click='mode="edit"' type="warning" style="position: fixed;left: 10px;top: 10px; background: rgb(65, 184, 132)">退出预览</el-button>
+    <el-button v-if="mode==='preview'" @click='mode="edit";history.pushState("xxx", "xxx",(location.origin + location.pathname) );' type="warning" style="position: fixed;left: 10px;top: 10px; background: rgb(65, 184, 132)">退出预览</el-button>
   </div>
+  
   <script src="../vendors/vue.min.js"></script>
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
   <script src="../vendors/av-min.js"></script>
   <script src="./js/av.js"></script>
+  <script>
+    let bus=new Vue()
+    Vue.prototype.$bus=bus
+  </script>
   <script src="./js/component/editSpan.js"></script>
   <script src="./js//component/LogIn.js"></script>
   <script src="./js//component/SignUp.js"></script>
@@ -41,6 +46,8 @@
   <script src="./js//component/Resume.js"></script>
   <script src="./js//component/App-aside.js"></script>
   <script src="./js/init/app.js"></script>
+  <script src="./js/background.js"></script>
+
 
 </body>
 
