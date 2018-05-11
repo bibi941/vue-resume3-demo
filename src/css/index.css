@@ -69,7 +69,13 @@
 .page > aside > .upper > .actions > li {
   margin: 10px;
 }
-
+.user-message{
+  font-size: 12px;
+  color: dimgrey;
+position: absolute;
+top: 35px;
+right: 5px;
+}
 .button {
   padding: 3px 0px;
   border: none;

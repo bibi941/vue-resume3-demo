@@ -1,5 +1,5 @@
 Vue.component('app-aside', {
-  props: ['mode', 'logoutVisable', 'shareLink'],
+  props: ['mode', 'logoutVisable', 'shareLink', 'userMessage'],
   template: `  
   <aside v-show="mode==='edit'">
       <div class="upper">
@@ -26,6 +26,7 @@ Vue.component('app-aside', {
             <el-button type="danger" @click="$emit('onlogout')" v-show="logoutVisable">登出</el-button>
           </li>
         </ul>
+        <div class='user-message'><span v-show='userMessage'>你好,</span><span/>{{userMessage.email}}</span></div>
       </div>
     </aside> `,
 

@@ -19,7 +19,8 @@
 <body>
   <div class="page" id="app">
     <!-- 边栏 -->
-  <app-aside :mode='mode' :share-link='shareLink' :logout-visable='AV.User.current()' @onclicksave='onClickSave'  @onprint='print' @onlogout='onLogOut'></app-aside>
+<app-aside :mode='mode' :share-link='shareLink' :logout-visable='AV.User.current()' :user-message='userMessage'
+  @onclicksave='onClickSave' @onprint='print' @onlogout='onLogOut'></app-aside>
     <main>
       <!-- 简历主界面 -->
       <resume :mode='mode' :display-resume='displayResume' :resume='resume'></resume>

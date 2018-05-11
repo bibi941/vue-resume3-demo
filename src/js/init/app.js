@@ -8,35 +8,10 @@ let app = new Vue({
     currentUser: { id: '' },
     previewUser: { id: '' },
     previewResume: {},
+    userMessage: '',
     shareLink: '',
     mode: 'edit', //preview
     resume: {
-      name: 'bibi',
-      birthy: '1994.08.24',
-      job: '前端工程师',
-      sex: '男',
-      email: 'sssrrr@vip.qq.com',
-      phone: '17608003060',
-      skills: [
-        { name: 'Vue', description: '了解Vuex+Vue-cli+Vue-Router' },
-        { name: 'CSS-LESS+SCSS', description: '百分百还原设计稿' }
-      ],
-      projects: [
-        {
-          name: '移动端网易云音乐',
-          link: 'www.baidu.com',
-          keywords: 'jq+parcel+qiniu+leancloud',
-          descrip: '移动端+电脑端后台+各种功能'
-        },
-        {
-          name: '移动端画板',
-          link: 'www.baidu.com',
-          keywords: 'canvas',
-          descrip: '一个小画板而已'
-        }
-      ]
-    },
-    initResume: {
       name: 'bibi',
       birthy: '1994.08.24',
       job: '前端工程师',
@@ -80,20 +55,22 @@ let app = new Vue({
       //登出
       if (new AV.User()) {
         AV.User.logOut()
+        this.userMessage = ''
         swal({
           title: '你已经成功退出',
           text: '2s后将自动回到主界面',
           timer: 2000,
           showConfirmButton: false
         })
-         setTimeout(() => {
-           location.reload()
-         }, 2000);
+        setTimeout(() => {
+          location.reload()
+        }, 2000)
       }
     },
     onLogIn(user) {
-      console.log("执行登录");
+      console.log('执行登录')
       this.currentUser = AV.User.current()
+      this.userMessage = AV.User.current().toJSON()
       this.logInVisable = false
       this.getResume(this.currentUser).then(resume => {
         app.resume = resume
@@ -119,10 +96,10 @@ let app = new Vue({
       //保存
       // let currentUser = AV.User.current()
       if (this.currentUser) {
-        console.log(11111);
+        console.log(11111)
         this.savaResume()
       } else {
-        console.log(22222);
+        console.log(22222)
         this.logInVisable = true
       }
     },
@@ -143,11 +120,11 @@ let app = new Vue({
           }
         },
         () => {
-            swal({
-              title: '保存失败',
-              type: 'warning',
-              confirmButtonText: 'Ok'
-            })
+          swal({
+            title: '保存失败',
+            type: 'warning',
+            confirmButtonText: 'Ok'
+          })
         }
       )
     },
@@ -163,12 +140,15 @@ let app = new Vue({
     },
     print() {
       window.print()
-    },
+    }
   }
 })
 
 //如果你是帐号登录的,刷新还在
 app.currentUser = AV.User.current()
+if (AV.User.current()) {
+  app.userMessage = AV.User.current().toJSON()
+}
 if (app.currentUser) {
   app.getResume(app.currentUser).then(resume => {
     app.resume = resume
