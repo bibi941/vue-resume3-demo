@@ -36,9 +36,17 @@ Vue.component('log-in', {
         },
         error => {
           if (error.code === 211) {
-            this.open('邮箱不存在')
+            swal({
+              title: '出错咯,邮箱不存在',
+              type: 'error',
+              confirmButtonText: 'Ok'
+            })
           } else if (error.code === 210) {
-            this.open('邮箱和密码不匹配')
+             swal({
+               title: '邮箱与密码不匹配',
+               type: 'warning',
+               confirmButtonText: 'Ok'
+             })
           }
         }
       )

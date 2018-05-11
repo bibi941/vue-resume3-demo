@@ -34,12 +34,20 @@ Vue.component('sign-up', {
       user.setEmail(this.signUp.email)
       user.signUp().then(
         user => {
-          this.open('注册成功,帮你登录啦')
+          swal({
+            title: '注册成功,已经帮你自动登录啦',
+            type: 'success',
+            confirmButtonText: 'Ok'
+          })
           this.$emit('signup', [user, this.signUp.email, this.signUp.password])
         },
         error => {
           if (error.code === 203) {
-            this.open('此邮箱已被注册')
+             swal({
+               title: '此邮箱已经被注册',
+               type: 'warning',
+               confirmButtonText: 'Ok'
+             })
           }
         }
       )

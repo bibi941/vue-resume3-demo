@@ -1,6 +1,5 @@
 Vue.component('app-aside', {
-  props: ['mode', 'logoutVisable'],
-
+  props: ['mode', 'logoutVisable', 'shareLink'],
   template: `  
   <aside v-show="mode==='edit'">
       <div class="upper">
@@ -17,8 +16,8 @@ Vue.component('app-aside', {
           <li>
             <el-button type="info"  @click="send">编辑</el-button>
           </li>
-          <li>
-            <el-button type="success" @click="$emit('onshare')" >分享</el-button>
+          <li v-show='shareLink'>
+            <el-button  type="success" @click="swal({title: '恭喜,这是你的分享连接',text: shareLink,type: 'success',confirmButtonText: 'Ok'})" >分享</el-button>
           </li>
           <li>
             <el-button type="warning" @click="$emit('onprint')">打印</el-button>
@@ -38,5 +37,5 @@ Vue.component('app-aside', {
     send() {
       this.$bus.$emit('edit', 'edit')
     }
-  },
+  }
 })

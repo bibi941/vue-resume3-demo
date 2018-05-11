@@ -98,10 +98,10 @@ Vue.component('resume', {
     },
     addProjects() {
       this.displayResume.projects.push({
-        name: '名称',
-        link: 'www.baidu.com',
-        keywords: '关键的1皮',
-        descrip: '描述描述123333333333333333333333333333333333333333333333'
+        name: '项目',
+        link: 'URL',
+        keywords: '关键字',
+        descrip: '详细描述'
       })
     },
     removekills(index) {

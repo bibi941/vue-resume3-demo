@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  
+  <link rel="stylesheet" href="./css/sweetalert2.min.css">
   <link rel="stylesheet" href="./css/index.css">
   <link rel="stylesheet" href="./css/login.css">
   <link rel="stylesheet" href="./css/signup.css">
@@ -17,7 +19,7 @@
 <body>
   <div class="page" id="app">
     <!-- 边栏 -->
-  <app-aside :mode='mode' :logout-visable='AV.User.current()' @onclicksave='onClickSave' @onshare='onShare' @onprint='print' @onlogout='onLogOut'></app-aside>
+  <app-aside :mode='mode' :share-link='shareLink' :logout-visable='AV.User.current()' @onclicksave='onClickSave'  @onprint='print' @onlogout='onLogOut'></app-aside>
     <main>
       <!-- 简历主界面 -->
       <resume :mode='mode' :display-resume='displayResume' :resume='resume'></resume>
@@ -26,23 +28,21 @@
     <log-in v-show="logInVisable" @close='logInVisable=false' @login='onLogIn' @gotosignup='logInVisable=false;signUpVisable=true'></log-in>
     <!-- 注册 -->
     <sign-up v-show="signUpVisable" @close='signUpVisable=false' @signup='onSignUp' @gotologin='logInVisable=true;signUpVisable=false'></sign-up>
-    <!-- 分享 -->
-    <share v-show="sharaVisable" :share-link='shareLink' @exit='sharaVisable=false'></share>
     <el-button v-if="mode==='preview'" @click='mode="edit";history.pushState("xxx", "xxx",(location.origin + location.pathname) );' type="warning" style="position: fixed;left: 10px;top: 10px; background: rgb(65, 184, 132)">退出预览</el-button>
   </div>
   
-  <script src="../vendors/vue.min.js"></script>
+  <script src="./js/vendors/vue.min.js"></script>
   <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-  <script src="../vendors/av-min.js"></script>
+  <script src="./js/vendors/av-min.js"></script>
   <script src="./js/av.js"></script>
   <script>
     let bus=new Vue()
     Vue.prototype.$bus=bus
   </script>
+  <script src="./js/vendors/sweetalert2.min.js"></script>
   <script src="./js/component/editSpan.js"></script>
   <script src="./js//component/LogIn.js"></script>
   <script src="./js//component/SignUp.js"></script>
-  <script src="./js//component/Share.js"></script>
   <script src="./js//component/Resume.js"></script>
   <script src="./js//component/App-aside.js"></script>
   <script src="./js/init/app.js"></script>

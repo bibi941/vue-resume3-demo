@@ -19,7 +19,33 @@ let app = new Vue({
       phone: '17608003060',
       skills: [
         { name: 'Vue', description: '了解Vuex+Vue-cli+Vue-Router' },
-        { name: 'CSS-LESS+SCSS', description: '百分百还原设计稿' },
+        { name: 'CSS-LESS+SCSS', description: '百分百还原设计稿' }
+      ],
+      projects: [
+        {
+          name: '移动端网易云音乐',
+          link: 'www.baidu.com',
+          keywords: 'jq+parcel+qiniu+leancloud',
+          descrip: '移动端+电脑端后台+各种功能'
+        },
+        {
+          name: '移动端画板',
+          link: 'www.baidu.com',
+          keywords: 'canvas',
+          descrip: '一个小画板而已'
+        }
+      ]
+    },
+    initResume: {
+      name: 'bibi',
+      birthy: '1994.08.24',
+      job: '前端工程师',
+      sex: '男',
+      email: 'sssrrr@vip.qq.com',
+      phone: '17608003060',
+      skills: [
+        { name: 'Vue', description: '了解Vuex+Vue-cli+Vue-Router' },
+        { name: 'CSS-LESS+SCSS', description: '百分百还原设计稿' }
       ],
       projects: [
         {
@@ -54,11 +80,19 @@ let app = new Vue({
       //登出
       if (new AV.User()) {
         AV.User.logOut()
-        this.open('注销成功')
-        window.location.reload()
+        swal({
+          title: '你已经成功退出',
+          text: '2s后将自动回到主界面',
+          timer: 2000,
+          showConfirmButton: false
+        })
+         setTimeout(() => {
+           location.reload()
+         }, 2000);
       }
     },
     onLogIn(user) {
+      console.log("执行登录");
       this.currentUser = AV.User.current()
       this.logInVisable = false
       this.getResume(this.currentUser).then(resume => {
@@ -85,16 +119,11 @@ let app = new Vue({
       //保存
       // let currentUser = AV.User.current()
       if (this.currentUser) {
+        console.log(11111);
         this.savaResume()
       } else {
+        console.log(22222);
         this.logInVisable = true
-      }
-    },
-    onShare() {
-      if (this.currentUser) {
-        this.sharaVisable = true
-      } else {
-        this.open('请先点击保存')
       }
     },
     savaResume(string) {
@@ -106,11 +135,19 @@ let app = new Vue({
         () => {
           if (string) {
           } else {
-            this.open('保存成功')
+            swal({
+              title: '保存成功',
+              type: 'success',
+              confirmButtonText: 'Ok'
+            })
           }
         },
         () => {
-          this.open('保存失败')
+            swal({
+              title: '保存失败',
+              type: 'warning',
+              confirmButtonText: 'Ok'
+            })
         }
       )
     },
@@ -127,9 +164,6 @@ let app = new Vue({
     print() {
       window.print()
     },
-    open(message) {
-      this.$alert(message, '来自bibi的提示', { confirmButtonText: '确定' })
-    }
   }
 })
 
