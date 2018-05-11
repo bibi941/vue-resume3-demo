@@ -146,6 +146,7 @@ let app = new Vue({
 
 //如果你是帐号登录的,刷新还在
 app.currentUser = AV.User.current()
+
 if (AV.User.current()) {
   app.userMessage = AV.User.current().toJSON()
 }

@@ -17,7 +17,7 @@
   }
   html {
     font-size: 18px;
-    color: #264E86;
+    color: #264e86;
   }
   [v-cloak] {
     display: none !important;
@@ -64,17 +64,17 @@
   margin-top: 15px;
   font-size: 24px;
   margin-left: 150px;
-  color:#264E86;
+  color: #264e86;
 }
 .page > aside > .upper > .actions > li {
   margin: 10px;
 }
-.user-message{
+.user-message {
   font-size: 12px;
   color: dimgrey;
-position: absolute;
-top: 35px;
-right: 5px;
+  position: absolute;
+  top: 35px;
+  right: 5px;
 }
 .button {
   padding: 3px 0px;
@@ -85,10 +85,8 @@ right: 5px;
 /* 主页面 */
 
 .resume {
-
   max-width: 800px;
   margin: 0 auto;
-
 }
 
 .resume > section {
@@ -103,8 +101,8 @@ right: 5px;
   text-align: center;
   margin: 20px;
 }
-.resume>section>h1 .el-input__inner{
-width: 25%;
+.resume > section > h1 .el-input__inner {
+  width: 25%;
 }
 .resume > section > h2 {
   text-align: center;
@@ -113,23 +111,22 @@ width: 25%;
 
 .resume > section > .profile {
   text-align: center;
-display: flex;
-text-align: center;
-justify-content: center;
+  display: flex;
+  text-align: center;
+  justify-content: center;
 }
-.resume>section>.profile>span{
-  margin: 0 10px
+.resume > section > .profile > span {
+  margin: 0 10px;
 }
-
 
 .resume .skills > ul > li {
   width: 48%;
-  border: 2px solid #0074E4;
+  border: 2px solid #0074e4;
   border-radius: 10px;
   margin-top: 10px;
   min-height: 82px;
 }
-.resume .skills>ul>li>div{
+.resume .skills > ul > li > div {
   margin: 10px 20px;
 }
 .resume .skills > ul {
@@ -141,16 +138,16 @@ justify-content: center;
 .resume > .projects > ol {
   margin: 0 auto;
 }
-.resume>.projects>ol>li>header>*{
+.resume > .projects > ol > li > header > * {
   margin: 5px 20px;
 }
-.descrip{
-  margin: 5px 20px
+.descrip {
+  margin: 5px 20px;
 }
 .resume > .projects > ol > li {
   min-height: 100px;
   width: 800px;
-  border: 2px solid #0074E4;
+  border: 2px solid #0074e4;
   border-radius: 10px;
   position: relative;
   margin: 30px 0;
@@ -165,8 +162,6 @@ justify-content: center;
   display: flex;
   justify-content: space-between;
 }
-
-
 
 .add-skills,
 .add-projects {
